@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo "capturing here.... with args $*" > /tmp/1
+vent=$1
+
+shift
+
+echo "tcpdump $*" >> /tmp/1
+tcpdump $* &
+
+echo "$vent" >> /tmp/1
+sleep $vent
+
+echo "%1" >> /tmp/1
+#kill %1
+killall tcpdump
+exit 0
